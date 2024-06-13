@@ -4,6 +4,7 @@
 .nfs*
 _*
 6.out
+.vscode
 #*
 example/hello/hello
 example/unionfs/unionfs
@@ -12,6 +13,8 @@ example/loopback/loopback
 example/multizip/multizip
 example/bulkstat/bulkstat
 example/zipfs/zipfs
+example/memfs/main
+example/memfsopt/main
 # test binaries
 *.test
 benchmark/bulkstat.bin
