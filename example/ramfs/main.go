@@ -17,24 +17,19 @@ import (
 
 func main() {
 	// Scans the arg list and sets up flags
-	debug := flag.Bool("debug", false, "print debugging messages.")
+	debug := flag.Bool("debug", true, "print debugging messages.")
 	flag.Parse()
-	if flag.NArg() < 2 {
+	if flag.NArg() < 1 {
 		// TODO - where to get program name?
 		fmt.Println("usage: main MOUNTPOINT BACKING-PREFIX")
 		os.Exit(2)
 	}
 
 	mountPoint := flag.Arg(0)
-	prefix := flag.Arg(1)
-	root := nodefs.NewMemNodeFSRoot(prefix)
+	root := nodefs.NewMemNodeFSRoot("")
 	conn := nodefs.NewFileSystemConnector(root, nil)
-	// options := make([]string, 0)
 	server, err := fuse.NewServer(conn.RawFS(), mountPoint, &fuse.MountOptions{
-		// Options:        append(options, "sync"),
 		Debug: *debug,
-		// WritebackCache: true,
-		// DirectMount: true,
 	})
 	if err != nil {
 		fmt.Printf("Mount fail: %v\n", err)

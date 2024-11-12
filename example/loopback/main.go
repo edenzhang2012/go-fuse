@@ -107,6 +107,8 @@ func main() {
 			DirectMountStrict: *directmountstrict,
 			FsName:            orig,       // First column in "df -T": original dir
 			Name:              "loopback", // Second column in "df -T" will be shown as "fuse." + Name
+			WritebackCache:    true,
+			MaxWrite:          128 * 1024,
 		},
 	}
 	if opts.AllowOther {

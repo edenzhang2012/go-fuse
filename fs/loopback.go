@@ -6,6 +6,7 @@ package fs
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"syscall"
@@ -319,6 +320,12 @@ var _ = (NodeOpener)((*LoopbackNode)(nil))
 
 func (n *LoopbackNode) Open(ctx context.Context, flags uint32) (fh FileHandle, fuseFlags uint32, errno syscall.Errno) {
 	flags = flags &^ syscall.O_APPEND
+	if flags&syscall.O_DIRECT != 0 {
+		fmt.Println("odirect")
+	} else {
+		fmt.Println("non odirect")
+	}
+	// flags = flags | syscall.O_DIRECT
 	p := n.path()
 	f, err := syscall.Open(p, int(flags), 0)
 	if err != nil {

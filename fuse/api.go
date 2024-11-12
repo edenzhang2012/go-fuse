@@ -254,6 +254,8 @@ type MountOptions struct {
 	// for more details.
 	SyncRead bool
 
+	WritebackCache bool
+
 	// If set, fuse will first attempt to use syscall.Mount instead of
 	// fusermount to mount the filesystem. This will not update /etc/mtab
 	// but might be needed if fusermount is not available.
